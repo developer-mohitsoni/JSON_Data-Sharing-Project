@@ -1,3 +1,4 @@
+import AddJsonDialog from "./Add-Json-Dialog";
 import JsonDataTable from "./JSON-Data-Table";
 import {
   Card,
@@ -19,7 +20,7 @@ const JsonEditor = () => {
         <JsonDataTable />
       </CardContent>
       <CardFooter>
-        <p>Card Footer</p>
+        <AddJsonDialog />
       </CardFooter>
     </Card>
   );
