@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import AddJsonDialog from "./Add-Json-Dialog";
 import JsonDataTable from "./JSON-Data-Table";
 import {
@@ -11,6 +12,8 @@ import {
 } from "./ui/card";
 
 const JsonEditor = () => {
+  const [refreshKey, setRefreshKey] = useState(0);
+
   const handleSave = async (jsonName: string, jsonData: string) => {
     const response = await fetch("/api/json", {
       method: "POST",
@@ -24,6 +27,7 @@ const JsonEditor = () => {
     });
 
     if (response.ok) {
+      setRefreshKey((prev) => prev + 1);
       console.log("data successfully added");
     } else {
       console.log("something went wrong!");
@@ -36,7 +40,7 @@ const JsonEditor = () => {
         <CardDescription>View and share your saved JSON data.</CardDescription>
       </CardHeader>
       <CardContent>
-        <JsonDataTable />
+        <JsonDataTable key={refreshKey} />
       </CardContent>
       <CardFooter>
         <AddJsonDialog onSave={handleSave} />

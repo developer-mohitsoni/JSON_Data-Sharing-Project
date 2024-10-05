@@ -33,3 +33,39 @@ export const POST = async (req: NextRequest) => {
     });
   }
 };
+
+export const GET = async () => {
+  const { userId } = auth();
+
+  if (!userId) {
+    return NextResponse.json({
+      error: "Unauthorized",
+      status: 401,
+    });
+  }
+
+  try {
+    const json = await prisma.jsonData.findMany({
+      where: {
+        userId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        id: true,
+        name: true,
+        createdAt: true,
+      },
+    });
+
+    return NextResponse.json(json);
+  } catch (error) {
+    console.error("Error fetching JSON:", error);
+
+    return NextResponse.json({
+      error: "Error fetching JSON",
+      status: 500,
+    });
+  }
+};

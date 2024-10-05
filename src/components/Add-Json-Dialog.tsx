@@ -27,15 +27,19 @@ const AddJsonDialog = ({ onSave }: AddJsonDialogProps) => {
 
   const [jsonName, setJsonName] = useState("");
 
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
   const handleSave = async () => {
     await onSave(jsonName, jsonData);
+
+    setOpenModal(false);
 
     setJsonName("");
     setJsonData("");
   };
 
   return (
-    <Dialog>
+    <Dialog open={openModal} onOpenChange={setOpenModal}>
       <DialogTrigger asChild>
         <Button>Add JSON Data</Button>
       </DialogTrigger>
