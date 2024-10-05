@@ -12,14 +12,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ShareIcon } from "lucide-react";
 
-const jsonDataList = [
-  {
-    id: "csbdcnsbcns",
-    name: "test",
-    createdAt: "2024-09-30T07:01:58.297Z",
-  },
-];
-
 const JsonDataTable = () => {
   const [jsonDataList, setJsonDataList] = useState<JsonData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
