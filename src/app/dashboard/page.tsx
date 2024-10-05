@@ -3,6 +3,8 @@ import { currentUser } from "@clerk/nextjs/server";
 import prisma from "../../../DB/db.config";
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-dynamic"; // Explicitly mark this page as dynamic
+
 const DashboardPage = async () => {
   try {
     const user = await currentUser();
